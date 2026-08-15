@@ -113,6 +113,16 @@ class ImmutableMedicine {
             _listsEqual(other.reminderHours, reminderHours);
   }
 
+  int estimateFullDaysRemaining() {
+    final dailyUsage = reminderHours.length;
+
+    if (dailyUsage == 0) {
+      return 0;
+    }
+
+    return remainingTablets ~/ dailyUsage;
+  }
+
   bool _listsEqual(List<int> first, List<int> second) {
     if (first.length != second.length) return false;
 
@@ -126,4 +136,14 @@ class ImmutableMedicine {
   @override
   int get hashCode =>
       Object.hash(name, remainingTablets, note, Object.hashAll(reminderHours));
+
+  @override
+  String toString() {
+    return 'ImmutableMedicine('
+        'name: $name, '
+        'remainingTablets: $remainingTablets, '
+        'reminderHours: $reminderHours, '
+        'note: $note'
+        ')';
+  }
 }
